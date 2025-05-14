@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolokácia</title>
+    <script>
+        // Funkcia na získanie polohy
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(sendLocation);
+            } else {
+                alert("Geolokácia nie je podporovaná týmto prehliadačom.");
+            }
+        }
+
+        // Funkcia na odoslanie polohy na server
+        function sendLocation(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            // Tu zadáte URL vášho servera, ktorý bude prijímať polohu
+            const serverURL = 'http://vaš-server.com/receive_location'; 
+
+            // Odoslanie údajov na server cez Fetch API
+            fetch(serverURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    latitude: lat,
+                    longitude: lon
+                })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Poloha odoslaná:', data))
+            .catch(error => console.error('Chyba pri odosielaní:', error));
+        }
+
+        // Zavolanie funkcie pri načítaní stránky
+        window.onload = getLocation;
+    </script>
+</head>
+<body>
+    <h1>Geolokácia je získaná a odoslaná na server!</h1>
+</body>
+</html>
