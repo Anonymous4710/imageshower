@@ -19,8 +19,8 @@
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
 
-            // Tu zadáte URL vášho servera, ktorý bude prijímať polohu
-            const serverURL = 'http://vaš-server.com/receive_location'; 
+            // Zadajte URL vášho servera na Heroku
+            const serverURL = 'https://moj-server.herokuapp.com/receive_location'; 
 
             // Odoslanie údajov na server cez Fetch API
             fetch(serverURL, {
@@ -34,15 +34,4 @@
                 })
             })
             .then(response => response.json())
-            .then(data => console.log('Poloha odoslaná:', data))
-            .catch(error => console.error('Chyba pri odosielaní:', error));
-        }
-
-        // Zavolanie funkcie pri načítaní stránky
-        window.onload = getLocation;
-    </script>
-</head>
-<body>
-    <h1>Geolokácia je získaná a odoslaná na server!</h1>
-</body>
-</html>
+            .then
